@@ -1,3 +1,10 @@
+//
+//  ContentView.swift
+//  Reminders Mock Up (Sprint 1)
+//
+//  Created by Prathithi Nellaiappan on 10/28/25.
+//
+
 #Preview {
     ContentView()
 }
@@ -71,4 +78,3 @@ struct CardView: View { //defined cardView
             )
     }
 }
-
