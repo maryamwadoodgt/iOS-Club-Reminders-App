@@ -20,6 +20,9 @@ struct ContentView: View {
         ("Completed", 0, "checkmark", .gray)
     ]
     
+    let remindersList = ReminderList(title: "Reminders", icon: "list.bullet", color: .orange)
+    let deletedList = ReminderList(title: "Recently Deleted", icon: "trash", color: .gray)
+    
     var body: some View {
         VStack(spacing: 15) { //spacing in between rows
             ForEach(0..<2) { row in
@@ -35,7 +38,19 @@ struct ContentView: View {
                 Spacer()
             }
             .padding(.leading, 15)
+            
+            // My Lists section
+            Text("My Lists")
+                .font(.title2)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+
+            ReminderGroupTile(top: remindersList, bottom: deletedList)
+                .padding(.horizontal)
+
             Spacer()
+            
         }
         .padding(.top, 150)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -76,5 +91,80 @@ struct CardView: View { //defined cardView
                     }
                 .padding(.horizontal, 12)
             )
+    }
+}
+
+struct ReminderList: Identifiable {
+    let id = UUID()
+    let title: String
+    let icon: String
+    let color: Color
+}
+
+struct ReminderGroupTile: View {
+    var top: ReminderList
+    var bottom: ReminderList
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top section
+            HStack(spacing: 12) {
+                Image(systemName: top.icon)
+                    .font(.system(size: 16)) // smaller icon
+                    .foregroundColor(.white)
+                    .padding(6)
+                    .background(top.color)
+                    .clipShape(Circle())
+
+                Text(top.title)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
+
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Text("2")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Image(systemName: "chevron.right")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+
+            Divider()
+
+            // Bottom section
+            HStack(spacing: 12) {
+                Image(systemName: bottom.icon)
+                    .font(.system(size: 16)) // smaller icon
+                    .foregroundColor(.gray)
+                    .padding(6)
+                    .background(Color(.systemGray5))
+                    .clipShape(Circle())
+
+                Text(bottom.title)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
+
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Text("1")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Image(systemName: "chevron.right")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+        }
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 3)
     }
 }
