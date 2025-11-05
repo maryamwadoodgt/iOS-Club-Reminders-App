@@ -35,11 +35,36 @@ struct ContentView: View {
                 Spacer()
             }
             .padding(.leading, 15)
+            
             Spacer()
+            Divider()
+            HStack {
+                Button(action: {
+                    print("New Reminder tapped!")
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.blue)
+                        .padding(10)
+                    Text("New Reminder")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color.blue)
+                }
+                
+                Spacer()
+                Button("Add List") {
+                    print("Add List tapped!")
+                }
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(.blue)
+                .padding(.trailing)
+            }
         }
         .padding(.top, 150)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.gray.opacity(0.2))
+        
+        
     }
 }
 
@@ -76,5 +101,6 @@ struct CardView: View { //defined cardView
                     }
                 .padding(.horizontal, 12)
             )
+        
     }
 }
