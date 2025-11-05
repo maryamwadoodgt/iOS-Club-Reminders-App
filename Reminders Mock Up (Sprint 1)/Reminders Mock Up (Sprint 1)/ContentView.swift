@@ -37,13 +37,12 @@ struct ContentView: View {
             .padding(.leading, 15)
             
             Spacer()
-            Divider()
-            HStack {
+            HStack(spacing: 2) {
                 Button(action: {
                     print("New Reminder tapped!")
                 }) {
                     Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 20))
+                        .font(.system(size: 25))
                         .foregroundColor(Color.blue)
                         .padding(10)
                     Text("New Reminder")
